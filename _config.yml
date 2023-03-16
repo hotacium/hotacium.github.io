@@ -2,8 +2,7 @@ title: "Hmiya's Blog"
 
 theme: minima
 
-author:
-  name: Hmiya Tacopium
+author.name: Hmiya
 
 minima:
   header_pages:
