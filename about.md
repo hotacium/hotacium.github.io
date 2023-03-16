@@ -6,6 +6,7 @@ title: About
 Hmiya, Tacopium ...
 
 ## Socials
+
 - GitHub: [hotacium](https://github.com/hotacium)
 - Mastodon: [@tacopium@mastodon-japan.net](https://mastodon-japan.net/@tacopium)
 
