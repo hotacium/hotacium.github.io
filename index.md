@@ -1,7 +1,5 @@
 ---
-layout: page
-title: "hmiya's blog あ"
-permalink: /
+layout: default
 ---
 
 # hmiya's blog あ
