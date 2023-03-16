@@ -1,8 +1,11 @@
 ---
-title: About
+title: About Me
 ---
 
-## Names
+## About This Blog
+This is memos for the outer world.
+
+## My Aliases
 Hmiya, Tacopium ...
 
 ## Socials
@@ -11,5 +14,6 @@ Hmiya, Tacopium ...
 - Mastodon: [@tacopium@mastodon-japan.net](https://mastodon-japan.net/@tacopium)
 
 ## Languages
+
 - Japanese
 - English
