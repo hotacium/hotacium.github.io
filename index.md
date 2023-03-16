@@ -1,8 +1,6 @@
-<!-- ---
-layout: default
---- -->
-
-
-# hmiya's blog あ
+---
+layout: home
+title: hmiya's blog あ
+---
 
 hello
