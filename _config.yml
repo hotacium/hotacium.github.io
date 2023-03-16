@@ -2,3 +2,5 @@ title: "Hmiya's Blog"
 theme: minima
 author:
   name: Hmiya / Tacopium
+header_pages:
+  - about.md
