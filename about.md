@@ -1,10 +1,10 @@
-this is about
-
-
-## name
-- hmiya
-- tacopium
+## Names
+Hmiya, Tacopium ...
 
 ## Socials
-- [GitHub]()
-- [Mastodon]()
+- GitHub: [hotacium](https://github.com/hotacium)
+- Mastodon: [@tacopium@mastodon-japan.net](https://mastodon-japan.net/@tacopium)
+
+## Languages
+- Japanese
+- English
