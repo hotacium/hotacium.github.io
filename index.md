@@ -1,6 +1,6 @@
 ---
 layout: home
-title: hmiya's blog あ
+title: Hmiya's Blog
 ---
 
 ## Links
