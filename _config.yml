@@ -1,7 +1,10 @@
 title: "Hmiya's Blog"
+
 theme: minima
+
 author:
   name: "Hmiya / Tacopium"
   email: h.miya.work[at]gmail.com
+
 header_pages:
   - about.md
