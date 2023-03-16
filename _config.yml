@@ -1,1 +1,5 @@
+baseURL: "https://blog.hmiya.dev"
+title: "Hmiya's Blog title"
 theme: minima
+header_pages:
+  - about.md
