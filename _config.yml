@@ -2,8 +2,8 @@ title: "Hmiya's Blog"
 
 theme: minima
 
-author.name: Hmiya
+author: 
+    name: Hmiya
 
-minima:
-  header_pages:
+header_pages:
     - about.md
