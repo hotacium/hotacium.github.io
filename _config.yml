@@ -3,8 +3,8 @@ title: "Hmiya's Blog"
 theme: minima
 
 author:
-  name: "Hmiya / Tacopium"
-  email: h.miya.work[at]gmail.com
+  name: "Hmiya\/Tacopium"
 
-header_pages:
-  - about.md
+minima:
+  header_pages:
+    - about.md
