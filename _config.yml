@@ -1,5 +1,4 @@
-baseURL: "https://blog.hmiya.dev"
-title: "Hmiya's Blog title"
+title: "Hmiya's Blog"
 theme: minima
-header_pages:
-  - about.md
+author:
+  name: Hmiya / Tacopium
