@@ -3,7 +3,7 @@ title: About Me
 ---
 
 ## About This Blog
-This is memos for the outer world.
+This blog contains just memos in case
 
 ## My Aliases
 Hmiya, Tacopium ...
