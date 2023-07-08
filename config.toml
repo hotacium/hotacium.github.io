@@ -7,8 +7,11 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
 
-theme = "archie-zola"
-taxonomies = [{ name = "tags" }]
+theme = "no-style-please"
+taxonomies = [
+    {name = "tags"}
+]
+
 
 [markdown]
 # Whether to do syntax highlighting
@@ -19,29 +22,13 @@ highlight_code = true
 [extra]
 # Put all your custom variables here
 
-mode = "dark"
-copyright = "hotacium"
+list_pages = true
 
-[extra.translations]
-languages = [{name = "en", url = "/"}]
-
-
-[[extra.translations.en]]
-show_more = "Read more ⟶"
-previous_page = "← Previous"
-next_page = "Next →"
-posted_on = "on "
-posted_by = "Published by"
-read_time = "minute read"
-all_tags = "All tags"
-menus = [
-    { name = "Home", url = "/", weight = 2 },
-    { name = "All posts", url = "/posts", weight = 2 },
-    { name = "About", url = "/about", weight = 3 },
-    { name = "Tags", url = "/tags", weight = 4 },
+header_nav = [
+    { name = "~home", url = "/" },
+    { name = "#tags", url = "/tags" },
+    { name = "about", url = "/about"},
+    # { name = "example", url = "http://example.com", new_tab=true },
 ]
-
-[[extra.social]]
-icon = "github"
-name = "GitHub"
-url = "https://github.com/XXXMrG/archie-zola"
+footer_nav = [
+]
