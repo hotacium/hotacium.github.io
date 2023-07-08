@@ -1,0 +1,3 @@
+[submodule "themes/tilde"]
+	path = themes/tilde
+	url = https://git.sr.ht/~savoy/tilde
