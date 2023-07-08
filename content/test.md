@@ -8,4 +8,10 @@ taxonomies:
 
 ## H2
 
+```rust
+fn main() {
+    println!("Hello");
+}
+```
+
 ### H3

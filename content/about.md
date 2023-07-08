@@ -6,7 +6,7 @@ title: "about"
 
 ## about me
 - aliases: tacopium
-- languages: JP, EN
+- languages: JP, EN ![a](static/icon_0.png)
 
 こんにちは
 
