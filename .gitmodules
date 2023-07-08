@@ -1,6 +1,0 @@
-[submodule "themes/no-style-please"]
-	path = themes/no-style-please
-	url = https://gitlab.com/4bcx/no-style-please.git
-[submodule "themes/apollo"]
-	path = themes/apollo
-	url = https://github.com/not-matthias/apollo
