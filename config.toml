@@ -17,6 +17,7 @@ theme = "after-dark"
 [extra]
 # Put all your custom variables here
 
+paginate_by = 5
 taxonomies = [
     # You can enable/disable RSS
     {name = "categories", feed = true},
