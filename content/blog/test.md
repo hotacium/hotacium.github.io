@@ -13,4 +13,3 @@ fn main() {
 
 ### H3
 
-![alt text](/static/images/icon_0.png)

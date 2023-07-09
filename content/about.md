@@ -1,12 +1,11 @@
 ---
 title: "about"
+date: 2023-07-09
 ---
 
-2023-07-09
-
 ## about me
-- aliases: tacopium
-- languages: JP, EN ![a](static/icon_0.png)
+- aliases: tacopium, etc.
+- languages: JP, EN
 
 こんにちは
 
