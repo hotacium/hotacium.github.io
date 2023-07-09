@@ -10,5 +10,6 @@ date: 2023-07-09
 こんにちは
 
 ## socials
+
 - Mastodon: [@tacopium@mastodon-japan.net](https://mastodon-japan.net/@tacopium)
 - Discord: tacopium
