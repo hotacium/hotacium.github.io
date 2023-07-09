@@ -7,11 +7,9 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
 
-theme = "no-style-please"
-taxonomies = [
-    {name = "tags"}
-]
-
+theme = "hook"
+title = "hmiya's blog"
+description = "Hook is a theme for Zola"
 
 [markdown]
 # Whether to do syntax highlighting
@@ -22,15 +20,6 @@ highlight_code = true
 [extra]
 # Put all your custom variables here
 
-list_pages = true
-author = "Hmiya"
-logo = "static/images/icon_0.png"
-
-header_nav = [
-    { name = "~home", url = "/" },
-    { name = "#tags", url = "/tags" },
-    { name = "about", url = "/about"},
-    # { name = "example", url = "http://example.com", new_tab=true },
-]
-footer_nav = [
+links = [
+    { title = "about", href = "/about" },
 ]

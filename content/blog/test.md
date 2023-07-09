@@ -1,10 +1,7 @@
 ---
 title: "test page"
-taxonomies:
-    tags: ["test"]
+date: 2023-07-09
 ---
-
-2023-07-09
 
 ## H2
 
@@ -15,3 +12,5 @@ fn main() {
 ```
 
 ### H3
+
+![alt text](/static/images/icon_0.png)

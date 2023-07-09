@@ -1,6 +1,2 @@
 ---
 ---
-
-# hmiya's blog
-
-## posts
