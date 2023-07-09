@@ -1,15 +1,16 @@
 ---
 title: "about"
-date: 2023-07-09
 ---
+
+このサイトは備忘録です 
 
 ## about me
 - aliases: tacopium, etc.
-- languages: JP, EN
+- languages: 日本語 (Japanese), English
 
 こんにちは
 
 ## socials
-
 - Mastodon: [@tacopium@mastodon-japan.net](https://mastodon-japan.net/@tacopium)
-- Discord: tacopium
+
+
