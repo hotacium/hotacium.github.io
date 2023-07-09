@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Hook is a theme for Zola">
+    <title>hmiya&#x27;s blog | 記事の追加テスト</title>
+    
+    <link rel="stylesheet" href="https://blog.hmiya.dev/style.css?h=5c5abba3a670f76f59be">
+    
+    
+    
+    
+</head>
+<body>
+    
+<header class="space">
+    <a href="https:&#x2F;&#x2F;blog.hmiya.dev">&LeftArrow; Home</a>
+</header>
+
+    
+<main>
+    <h1>記事の追加テスト</h1>
+    
+    <p class="secondary">26 July, 2022</p>
+    
+    <div class="space"></div>
+    <h1 id="volatile-read-write">Volatile Read/Write</h1>
+<h2 id="definition">Definition</h2>
+<ul>
+<li>
+<p>Volatile read/write mean that the read/write operations are not optimized away by a compiler. </p>
+</li>
+<li>
+<blockquote>
+<p>The compiler shouldn't change the relative order or number of volatile memory operations. <sup class="footnote-reference"><a href="#1">1</a></sup></p>
+</blockquote>
+</li>
+<li>
+<p><a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">C11's definition of volatile</a>: </p>
+</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p>Mainly used to memory-mapped I/O, especially: </p>
+<ol>
+<li>to registers (or memory) whose values change by read/write
+<ul>
+<li>ex. reading the register clears the register, which means the relative order or number of volatile operations are important.</li>
+</ul>
+</li>
+<li>to read the register repeatedly to detect status update
+<ul>
+<li>the reads are likely to be omitted. </li>
+</ul>
+</li>
+<li>when write and then read memory and know whether it is memory or not. If the value are the same, it is assumed as memory.</li>
+</ol>
+<p>Example:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// example of the 2nd situation:
+</span><span style="color:#b48ead;">loop </span><span>{
+</span><span>    </span><span style="color:#b48ead;">let</span><span> flag = (</span><span style="color:#d08770;">0x000 </span><span>as </span><span style="color:#b48ead;">*mut u8</span><span>).</span><span style="color:#96b5b4;">read</span><span>();
+</span><span>    </span><span style="color:#b48ead;">if</span><span> flag &gt; </span><span style="color:#d08770;">0 </span><span>{ </span><span style="color:#65737e;">/* do something */ </span><span>}
+</span><span>}
+</span></code></pre>
+<h2 id="in-rust">In Rust</h2>
+<h3 id="rust-interface-read-volatile-write-volatile">Rust interface: <code>read_volatile</code> / <code>write_volatile</code></h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/core/ptr/fn.read_volatile.html"><code>core::ptr::read_volatile</code></a>
+<ul>
+<li><a href="https://doc.rust-lang.org/core/primitive.pointer.html#method.read_volatile"><code>read_volatile</code></a> (raw pointer method)</li>
+</ul>
+</li>
+<li><a href="https://doc.rust-lang.org/core/ptr/fn.write_volatile.html"><code>core::ptr::write_volatile</code></a>
+<ul>
+<li><a href="https://doc.rust-lang.org/core/primitive.pointer.html#method.write_volatile"><code>write_volatile</code></a> (raw pointer method)</li>
+</ul>
+</li>
+</ul>
+<h3 id="memos-about-volatile-reads-writes-in-rust">Memos about (volatile) reads/writes in Rust</h3>
+<p>What I know so far about Rust and volatile:</p>
+<ul>
+<li>Rust volatile semantics is almost always end up pretty similar to <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">C11's definition of volatile</a> </li>
+<li>A Rust reference is equivalent to a non-NULL <strong>pointer-to-non-volatile</strong> object. <sup class="footnote-reference"><a href="#2">2</a></sup></li>
+<li>A Rust pointer is equivalent to <strong>a C plain pointer</strong>, which is not <strong>volatile</strong>. <sup class="footnote-reference"><a href="#2">2</a></sup></li>
+<li>If you need volatile reads/writes, use <code>read_volatile</code> / <code>write_volatile</code>. <sup class="footnote-reference"><a href="#2">2</a></sup></li>
+<li>Volatile reads/writes are mainly for memory-mapped I/O. <sup class="footnote-reference"><a href="#2">2</a></sup></li>
+<li>The only use for volatile is to access memory-mapped I/O, which is always unsafe since you're writing to an arbitrary memory location outside of Rust's control</li>
+</ul>
+<hr />
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://internals.rust-lang.org/t/volatile-and-sensitive-memory/3188">Volatile and sensitive memory</a><br />
+<sup class="footnote-reference"><a href="#2">2</a></sup>: <a href="https://doc.rust-lang.org/std/ptr/fn.read_volatile.html">read_volatile</a></p>
+</div>
+<hr />
+<h2 id="memo">memo</h2>
+<h3 id="q">Q</h3>
+<blockquote>
+<p>since there is no <code>volatile</code> modifier, does that mean that the Rust compiler must assume that all memory is volatile by default?
+In particular, in general given <code>x: &amp;u64</code>, the compiler won't know if x is a reference to value stored in volatile memory, right?</p>
+</blockquote>
+<blockquote>
+<p>In particular, &quot;volatile read&quot; and &quot;volatile write&quot; seem to only make sense under the assumption that there are no speculative reads/writes to the memory they are writing to, but there's no way to indicate to rustc that no speculative reads/writes are allowed. </p>
+</blockquote>
+<ul>
+<li>todo: speculative reads/writes?: </li>
+<li></li>
+</ul>
+<h3 id="a">A</h3>
+<blockquote>
+<p>You cannot <code>volatile_store</code> or <code>volatile_load</code> an object that is pointed to by a reference; that would be a violation of the aliasing rules, just like having an exclusive reference and a shared reference to the same object is.</p>
+</blockquote>
+<h3 id="q-1">Q</h3>
+<blockquote>
+<p>I'm not sure what you mean. Here's some code. Is the compiler allowed rewrite <code>easy</code> into <code>easy_optimized</code>? Is it allowed to rewrite <code>tricky</code> into <code>trycky_extra_load</code>?</p>
+</blockquote>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#bf616a;">feature</span><span>(core_intrinsics)]
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">easy</span><span>(</span><span style="color:#bf616a;">x</span><span>: &amp;</span><span style="color:#b48ead;">u64</span><span>, </span><span style="color:#bf616a;">y</span><span>: &amp;</span><span style="color:#b48ead;">u64</span><span>) -&gt; </span><span style="color:#b48ead;">u64 </span><span>{
+</span><span>    </span><span style="color:#b48ead;">if </span><span>*x != </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        *x
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        *y
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">easy_optimized</span><span>(</span><span style="color:#bf616a;">x</span><span>: &amp;</span><span style="color:#b48ead;">u64</span><span>, </span><span style="color:#bf616a;">y</span><span>: &amp;</span><span style="color:#b48ead;">u64</span><span>) -&gt; </span><span style="color:#b48ead;">u64 </span><span>{
+</span><span>    </span><span style="color:#65737e;">// The compiler replaces two loads of |*x| 
+</span><span>    </span><span style="color:#b48ead;">let</span><span> ret = *x;
+</span><span>    </span><span style="color:#b48ead;">if</span><span> ret != </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        ret
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        *y
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">tricky</span><span>(</span><span style="color:#bf616a;">x</span><span>: &amp;</span><span style="color:#b48ead;">u64</span><span>, </span><span style="color:#bf616a;">y</span><span>: &amp;</span><span style="color:#b48ead;">u64</span><span>) -&gt; </span><span style="color:#b48ead;">u64 </span><span>{
+</span><span>    </span><span style="color:#b48ead;">if unsafe </span><span>{ std::intrinsics::volatile_load(x as </span><span style="color:#b48ead;">*const u64</span><span>) } != </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">unsafe </span><span>{ std::intrinsics::volatile_load(x as </span><span style="color:#b48ead;">*const u64</span><span>) }
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        *y
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">tricky_extra_load</span><span>(</span><span style="color:#bf616a;">x</span><span>: &amp;</span><span style="color:#b48ead;">u64</span><span>, </span><span style="color:#bf616a;">y</span><span>: &amp;</span><span style="color:#b48ead;">u64</span><span>) -&gt; </span><span style="color:#b48ead;">u64 </span><span>{
+</span><span>    </span><span style="color:#65737e;">// The compiler adds a spurious read of |*x| when compiling `tricky`.
+</span><span>    </span><span style="color:#b48ead;">let </span><span>_ = *x;
+</span><span>    </span><span style="color:#b48ead;">if unsafe </span><span>{ std::intrinsics::volatile_load(x as </span><span style="color:#b48ead;">*const u64</span><span>) } != </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">unsafe </span><span>{ std::intrinsics::volatile_load(x as </span><span style="color:#b48ead;">*const u64</span><span>) }
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        *y
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>  </span><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#d08770;">1</span><span>;
+</span><span>  </span><span style="color:#b48ead;">let</span><span> y = </span><span style="color:#d08770;">2</span><span>;
+</span><span>  </span><span style="color:#96b5b4;">easy</span><span>(&amp;x, &amp;y);
+</span><span>  </span><span style="color:#96b5b4;">easy_optimized</span><span>(&amp;x, &amp;y);
+</span><span>  </span><span style="color:#96b5b4;">tricky</span><span>(&amp;x, &amp;y);
+</span><span>  </span><span style="color:#96b5b4;">tricky_extra_load</span><span>(&amp;x, &amp;y);
+</span><span>}
+</span></code></pre>
+<h3 id="a-1">A</h3>
+<blockquote>
+<p>Yes it is, because you are using a <code>&amp;u64</code>, which guarantees that it points to valid instance of u64. Now, this isn't actually specified in the documentation, but Rust (at least the way it is currently implemented ) will also assume that it points to normal memory where reading the value multiple times will not result in any-side-effects and will always return the same value.</p>
+</blockquote>
+<h3 id="a-2">A</h3>
+<blockquote>
+<blockquote>
+<p>So, would it be fair to say that a Rust reference is equivalent to a non-NULL pointer-to-non-volatile object?
+Yes</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>So, would it be fair to say that a Rust pointer is equivalent to a C pointer to volatile object?
+Not quite. <strong>Regular reads and writes are not volatile</strong>, so you'll need to use the volatile functions if that's what you want.</p>
+</blockquote>
+</blockquote>
+<h3 id="a-3">A</h3>
+<blockquote>
+<blockquote>
+<p>So, would it be fair to say that a Rust reference is equivalent to a non-NULL pointer-to-non-volatile object?
+Yes</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>So, would it be fair to say that a Rust pointer is equivalent to a C pointer to volatile object?
+No, a Rust pointer is equivalent to <strong>a plain C pointer</strong>. A C compiler is not allowed to insert a spurious load if a pointer is never dereferenced (volatile dereferences don't count). This is because, in C, dereferencing a (non-volatile) pointer requires the pointer to point to a valid object in normal memory, otherwise undefined behavior happens. Since the compiler assumes undefined behavior never happens it can assure that the pointer is safely deference-able. Rust pointers work the same way.</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>spurious: false and not what it appears to be, or (of reasons and judgements) based on something that has not been correctly understood and therefore false: 
+<ul>
+<li>ex. Some of the arguments in favor of shutting the factory are questionable and others downright spurious</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>The only use for volatile is to access memory-mapped I/O, which is always unsafe since you're writing to an arbitrary memory location outside of Rust's control. You can create a safe wrapper around a raw pointer to allow safe access to a specific I/O memory location, but the actual access will still need to use unsafe code.</p>
+</blockquote>
+<h3 id="q-2">Q</h3>
+
+</main>
+
+    <div class="dark-mode-buttons">
+        <button class="dark-mode-button" id="dark-mode-on"><img src="https://blog.hmiya.dev/dark_mode.svg" width="24" height="24" alt="Dark mode" aria-label="dark mode toggle" title="Dark mode"></button>
+        <button class="dark-mode-button" id="dark-mode-off"><img src="https://blog.hmiya.dev/light_mode.svg" width="24" height="24" alt="Light mode" aria-label="light mode toggle" title="Light mode"></button>
+    </div>
+    <script>
+        const cls = document.body.classList;
+        const getSessionTheme = sessionStorage.getItem("theme");
+        if (getSessionTheme === "dark") {
+            cls.toggle("dark-mode", true);
+        } else if (getSessionTheme === "light") {
+            cls.toggle("dark-mode", false);
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            cls.toggle("dark-mode", true);
+        }
+
+        document.getElementById("dark-mode-on").addEventListener("click", function(e) {
+            cls.toggle("dark-mode", true);
+            sessionStorage.setItem("theme", "dark");
+        });
+        document.getElementById("dark-mode-off").addEventListener("click", function(e) {
+            cls.toggle("dark-mode", false);
+            sessionStorage.setItem("theme", "light");
+        });
+    </script>
+    <noscript>
+        <style>
+            .dark-mode-buttons {
+                display: none;
+            }
+        </style>
+    </noscript>
+</body>
+</html>

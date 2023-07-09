@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://blog.hmiya.dev/</loc>
+    </url>
+    <url>
+        <loc>https://blog.hmiya.dev/about/</loc>
+    </url>
+    <url>
+        <loc>https://blog.hmiya.dev/blog/</loc>
+    </url>
+    <url>
+        <loc>https://blog.hmiya.dev/blog/20220726111151/</loc>
+        <lastmod>2022-07-26</lastmod>
+    </url>
+    <url>
+        <loc>https://blog.hmiya.dev/blog/test/</loc>
+        <lastmod>2023-07-09</lastmod>
+    </url>
+</urlset>

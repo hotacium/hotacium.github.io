@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Hook is a theme for Zola">
+    <title>hmiya&#x27;s blog</title>
+    
+    <link rel="stylesheet" href="https://blog.hmiya.dev/style.css?h=5c5abba3a670f76f59be">
+    
+    
+    
+    
+</head>
+<body>
+    
+    <header class="space">
+        <h1>hmiya&#x27;s blog</h1>
+        
+        
+        <nav class="header-links">
+            
+            <a href="&#x2F;about">about</a>
+            
+            
+        </nav>
+        
+    </header>
+    
+    
+    
+    
+    <main>
+        
+        
+        <h2>Recent posts</h2>
+        <ul>
+            
+            <li><a href="https:&#x2F;&#x2F;blog.hmiya.dev&#x2F;blog&#x2F;test&#x2F;">test page</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;blog.hmiya.dev&#x2F;blog&#x2F;20220726111151&#x2F;">記事の追加テスト</a></li>
+            
+        </ul>
+        <p><a href="https:&#x2F;&#x2F;blog.hmiya.dev&#x2F;blog&#x2F;">Archive</a></p>
+        
+    </main>
+    
+    
+    <div class="dark-mode-buttons">
+        <button class="dark-mode-button" id="dark-mode-on"><img src="https://blog.hmiya.dev/dark_mode.svg" width="24" height="24" alt="Dark mode" aria-label="dark mode toggle" title="Dark mode"></button>
+        <button class="dark-mode-button" id="dark-mode-off"><img src="https://blog.hmiya.dev/light_mode.svg" width="24" height="24" alt="Light mode" aria-label="light mode toggle" title="Light mode"></button>
+    </div>
+    <script>
+        const cls = document.body.classList;
+        const getSessionTheme = sessionStorage.getItem("theme");
+        if (getSessionTheme === "dark") {
+            cls.toggle("dark-mode", true);
+        } else if (getSessionTheme === "light") {
+            cls.toggle("dark-mode", false);
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            cls.toggle("dark-mode", true);
+        }
+
+        document.getElementById("dark-mode-on").addEventListener("click", function(e) {
+            cls.toggle("dark-mode", true);
+            sessionStorage.setItem("theme", "dark");
+        });
+        document.getElementById("dark-mode-off").addEventListener("click", function(e) {
+            cls.toggle("dark-mode", false);
+            sessionStorage.setItem("theme", "light");
+        });
+    </script>
+    <noscript>
+        <style>
+            .dark-mode-buttons {
+                display: none;
+            }
+        </style>
+    </noscript>
+</body>
+</html>
